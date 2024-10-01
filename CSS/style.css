@@ -1,6 +1,11 @@
 /* ------------ Elements de base ------------ */
-a{
+a,
+button{
     all : unset
+}
+a,
+button{
+    cursor: pointer;
 }
 a:hover{
     background-color: white;
@@ -49,7 +54,6 @@ footer a:hover {
 }
 
 button{
-    all : unset;
     background-color : #052962;
     color : white;
     padding: 5%;
