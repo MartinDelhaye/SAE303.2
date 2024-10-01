@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="CSS/style.css">
+    <!-- Link JS -->
+    <!-- Libraries -->
+    <script src="Scripts/snap.svg-min.js"></script>
+    <script src="Scripts/gsap.min.js"></script>
+    <script src="Scripts/ScrollTrigger.min.js"></script>
+    <!-- Main -->
+    <script src="Scripts/scripts.js"></script>
+
+    <!-- favicon -->
+    <link rel="icon" href="Images/icon-the-guardian.png" type="image/x-icon">
+
+    <!-- Titre Page -->
+    <title>SAE303.2</title>
+</head>
+<body>
+    <svg id="navBarSvg" width="100" height="100vh"></svg>
+    
+    <header class="flex padding">
+        <a href="https://www.theguardian.com/europe" target="_blank" class="padding">
+            <img src="Images/The_Guardian_Blanc.png" alt="logo" id="logoTheGuardian">
+        </a>
+    </header>
+
+    <main class="flex flex-column flex-justify-center flex-align-items-center gap padding">
+        <article id="article" class="flex flex-column flex-align-items-center flex-justify-center">
+            <h2 id="titreArticle">Will France be able to meet its targets set for 2030 regarding the number of charging infrastructures?</h2>
+            <p class="textArticle">
+                The United Kingdom has around 65,000 charging points for over 1 million electric vehicles. The development is rapid, with a new public charging station installed every 25 minutes, which reflects the country's determination to support electric mobility. But is this development as significant as in other countries?
+                <br><br>
+                We will focus on France and see if France can achieve its set goals for 2030 regarding the number of charging infrastructures.
+                <br><br>
+                After reaching 100,000 publicly accessible charging points in May 2023, France aims to achieve 400,000 by 2030, which represents about 3,960 charging points on average per department.
+                <br><br>
+                To better understand their current and future development, we will focus on one department, Pas-de-Calais (62). Currently, there are 1,554 charging points. This department would therefore need to deploy an additional 2,406 charging points over 6 years to meet the set objective.
+                <br><br>
+                The graph below allows us to track the growth of charging points and electric cars from 2018 to 2024, as well as to preview the curve to reach 3,960 charging stations by 2030.
+                <br><br>
+                This graph shows that the growth in the number of electric vehicles is greater than that of charging infrastructure. Although certain indicators show that the charging stations are well distributed according to the number of vehicles across each municipality, in Pas-de-Calais, there is an average of 32 electric vehicles for only 2 charging stations per municipality. Furthermore, we observe 854 municipalities with electric vehicles compared to only 104 with charging stations.
+                <br><br>
+            </p>
+            
+            <section id="dataviz" class="flex flex-column flex-justify-center flex-align-items-center gap width-70 padding">
+                <!-- Div utilisée par Snap.js -->
+                <div id="graph1" class="width-100"></div>
+                
+                <!-- Div avec les boutons -->
+                <div class="flex flex-row flex-justify-center flex-align-items-center gap width-100">
+                    <div class="flex flex-column flex-justify-center flex-align-items-center gap width-100">
+                        <h3>What you want to see:</h3>
+                        <div class="flex flex-justify-center flex-align-items-center gap">
+                            <button class="buttonGraph" data-modegraph="active" data-modeactiveelemnts="VpEl">Electric Cars</button>
+                            <button class="buttonGraph" data-modegraph="active" data-modeactiveelemnts="GP">Charging Points</button>
+                            <button class="buttonGraph" data-modegraph="noActive">Disabled</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-column flex-justify-center flex-align-items-center gap width-100">
+                        <h3>If you have difficulty reading:</h3>
+                        <div class="flex flex-row flex-justify-center flex-align-items-center gap">
+                            <button class="buttonText" data-weight="bold">Bolder</button>
+                            <button class="buttonText" data-weight="normal">Normal</button>
+                        </div>  
+                    </div>
+                </div>
+            </section>
+
+            <p class="textArticle">
+                Focusing now on 2024, it is important to note that only 12% of electric vehicle users regularly use public charging stations. To have one charging station per car, there would need to be around 3,370 charging points, which is double the number of charging points in 2024. There is therefore a significant lack of charging points, largely due to the fact that their deployment is not keeping pace with the growth of the electric vehicle fleet.
+                <br><br>
+                To address this, France could, for example, reconsider its strategy regarding infrastructure. Public parking lots, although among the most used places for charging, are among the sites with the fewest charging points. It would be wise to strengthen these facilities in order to better meet the growing demand.
+                <br><br>
+                In conclusion, even though the development of charging stations in the UK is relatively fast, it may not necessarily keep pace with the growth of electric cars.
+            </p>
+            <img src="Images/Graph-2.png" alt="charger" class="width-70" id="graph2">
+        </article>
+        
+
+    </main>
+
+    <footer class="flex flex-column">
+        <section id="source" class="flex flex-column">
+            <h2 class="souligner">Source:</h2>
+            <a href="https://www.enedis.fr/sites/default/files/documents/pdf/utilisation-et-recharge-enquete-comportementale-aupres-des-utilisateurs-de-vehicules-electriques-septembre-2024-particuliers-v2.pdf" target="_blank">Enedis enquête 2024</a>
+            <a href="https://www.teamfrance-export.fr/infos-sectorielles/33947/33947-le-royaume-uni-approche-du-million-de-bornes-de-recharge-pour-voitures-electriques" target="_blank">Team France export</a>
+        </section>
+    </footer>
+    
+</body>
+</html>
