@@ -123,18 +123,32 @@ function ChargementCalquesGraph(loadedFragment) {
     // Initialisation de la visibilité des éléments
     modeActive();
 
+    // Récupérer la position et la largeur du texte
+    let bbox = titre.getBBox(); // Renvoie la box de délimitation pour du titres
+
+    // Créer une ligne (barre) en dessous du titre
+    let barre = titre.paper.line(bbox.x, bbox.y2, bbox.x, bbox.y2).attr({
+        stroke: "white",
+        strokeWidth: 1,
+        display: "none",  // Cacher initialement
+    });
+
+    // Ajout d'événements hover pour le titre, modification avec GSAP
     titre.hover(
         function () {
-            // Sur hover, appliquer une décoration
-            titre.attr({
-                style: "text-decoration: underline;"
+            // Au survol, animer l'apparition de la barre
+            gsap.to(barre.node, {
+                duration: 0.5, 
+                attr: { x2: bbox.x2 }, 
+                display: "block", 
             });
-
         },
         function () {
-            // Quand on quitte le hover, retirer la décoration
-            titre.attr({
-                "text-decoration": "none"
+            // Au retrait du hover, rétracter la barre
+            gsap.to(barre.node, {
+                duration: 0.5,
+                attr: { x2: bbox.x },
+                display: "none", 
             });
         }
     );
@@ -144,12 +158,12 @@ function ChargementCalquesGraph(loadedFragment) {
 
 
 }
-// Fonction générique pour mettre ou retirer l'effet de survol
+// Fonction pour mettre ou retirer l'effet de survol
 function mettreOuRetirerEnAvant(action, classe) {
     let elements = classe === "VpEl" ? elementsInteractionGP : elementsInteractionVpEl;
     let opacity = action === "Mettre" ? 0.5 : 1;
-    elements.forEach(element => {
-        if (element.attr("opacity") != 0) element.animate({ opacity }, 100);
+    elements.forEach(focus => {
+        if (focus.attr("opacity") != 0) focus.animate({ opacity }, 100);
     });
 }
 // Fonction pour changer le focus des éléments (cacher/montrer)
@@ -182,8 +196,6 @@ function afficherButtonsGraph(when) {
 }
 // Fonction pour géré l'action sur les click des buttonGraph
 function actionButtonsGraph() {
-    console.log(this.dataset.modegraph);
-    console.log(this.dataset.modeactiveelemnts);
     modeGraph = this.dataset.modegraph;
     if (this.dataset.modeactiveelemnts) modeActiveElements = this.dataset.modeactiveelemnts;
     modeActive();
@@ -201,7 +213,7 @@ function afficherButtonsText(when) {
 function actionButtonsText() {
     afficherButtonsText(this.dataset.weight);
     elementsTexte.forEach(focus => {
-        focus.attr({ "font-weight": this.dataset.weight });  // Ajoute le style gras
+        focus.attr({ "font-weight": this.dataset.weight }); 
 
     });
 }
@@ -237,9 +249,6 @@ function modeActive() {
                     // Transformation de l'icone GP
                     iconGP.animate({ transform: 'translate(-68, 2) rotate(-20))' }, 0);
                     break;
-                default:
-                    console.log("mode non reconnu de modeActiveElements");
-                    break;
             }
             break;
         case "noActive":
@@ -258,7 +267,7 @@ function modeActive() {
                     () => mettreOuRetirerEnAvant("Retirer", "VpEl")
                 );
                 focus.click(() => {
-                    modeActiveElements = "VpEl"; // Met à jour modeActiveElements
+                    modeActiveElements = "VpEl"; 
                     modeGraph = "active";
                     modeActive();
                 });
@@ -269,14 +278,11 @@ function modeActive() {
                     () => mettreOuRetirerEnAvant("Retirer", "GP")
                 );
                 focus.click(() => {
-                    modeActiveElements = "GP"; // Met à jour modeActiveElements
+                    modeActiveElements = "GP"; 
                     modeGraph = "active";
                     modeActive();
                 });
             });
-            break;
-        default:
-            console.log("mode non reconnu");
             break;
     }
 }
@@ -305,13 +311,13 @@ function barreNav() {
 
     // Créer l'animation du point en fonction du scroll
     gsap.to(navPoint.node, {
-        cy: window.innerHeight - 120, // Position finale du point
-        ease: "none", // Animation linéaire
+        cy: window.innerHeight - 120, 
+        ease: "none", 
         scrollTrigger: {
-            trigger: document.body, // Basé sur le document entier
+            trigger: document.body,
             start: "top top",
             end: "bottom bottom",
-            scrub: true, // Lier l'animation au scroll
+            scrub: true, 
             markers: false,
         }
     });
@@ -321,10 +327,10 @@ function barreNav() {
         gsap.to(navPoint.node, {
             fill: "white",
             stroke: "#052962",
-            strokeWidth: 1, // Largeur de la bordure
-            r: 10, // Rayon du cercle
-            yoyo: true, // Retourner à l'état d'origine
-            repeat: 1, // Ne répéter qu'une fois
+            strokeWidth: 1, 
+            r: 10, 
+            yoyo: true, 
+            repeat: 1, 
             scrollTrigger: {
                 trigger: trigger[0],
                 start: trigger[1],
@@ -354,16 +360,15 @@ function appearText(selector, dureeAnimation) {
 
         // Configuration initiale : position et opacité de chaque lettre
         gsap.set(letters, {
-            y: -100, // Position de départ en dehors de l'écran
-            opacity: 0, // Invisibilité au départ
+            y: -100, 
+            opacity: 0, 
         });
 
         // Animation de chute pour chaque lettre
         gsap.to(letters, {
-            y: 0, // Retour à la position d'origine
-            opacity: 1, // Rendre visible
-            duration: dureeAnimation, // Vitesse de chaque lettre (définie par le paramètre)
-            ease: "bounce.out", // Effet de rebond
+            y: 0, 
+            opacity: 1, 
+            duration: dureeAnimation, 
             stagger: dureeAnimation * 0.1,
         });
     });
